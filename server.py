@@ -1,6 +1,9 @@
 import socket
 import threading
 import random
+import json
+from quests import Quest
+from map_generation import generate_map, get_terrain_type
 
 # Server settings
 HOST = '127.0.0.1'  # Localhost
@@ -9,15 +12,24 @@ PORT = 12345         # Port to listen on
 clients = []
 player_data = {}
 
-# Simple map and NPC data
+# Simple map generation
 map_size = 20
-game_map = [['.' for _ in range(map_size)] for _ in range(map_size)]
-game_map[random.randint(0, map_size-1)][random.randint(0, map_size-1)] = 'E'  # Example Enemy
+game_map = generate_map(map_size)
+npcs = {}
+quests = []
+
+# Sample quest
+quests.append(Quest("Defeat the Goblin", "Defeat 3 Goblins in the forest.", "Goblin", 3))
 
 def handle_client(conn, addr):
     print(f"[NEW CONNECTION] {addr} connected.")
     clients.append(conn)
-    player_data[addr] = {'name': addr, 'health': 100, 'position': (0, 0)}
+    player_data[addr] = {
+        'name': addr,
+        'health': 100,
+        'position': (0, 0),
+        'quests': []
+    }
 
     while True:
         try:
@@ -45,6 +57,10 @@ def process_message(addr, message):
     elif command == "COMBAT":
         target = parts[1]
         combat(addr, target)
+    elif command == "QUEST":
+        accept_quest(addr, parts[1])
+    elif command == "STATUS":
+        check_status(addr)
 
     broadcast(f"Update: {player_data}")
 
@@ -67,6 +83,19 @@ def combat(addr, target):
             del player_data[target]
 
     broadcast(f"Combat Update: {player_data}")
+
+def accept_quest(addr, quest_name):
+    for quest in quests:
+        if quest.name == quest_name:
+            player_data[addr]['quests'].append(quest)
+            print(f"[QUEST] {addr} accepted quest: {quest.name}")
+            break
+
+def check_status(addr):
+    # Send the current status of quests to the player
+    quests_status = player_data[addr]['quests']
+    response = f"Quest Status: {[quest.name for quest in quests_status]}"
+    clients[addr].send(response.encode('utf-8'))
 
 def broadcast(message):
     for client in clients:
