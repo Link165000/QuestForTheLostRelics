@@ -51,7 +51,7 @@
   - Server-client structure for multiplayer functionality.
   - Consider using Python sockets for networking.
   - Multiplayer style game - collaboration, raid parties and chat
-  - Raid parties for harder bosses, and 
+  - Raid parties for harder bosses
 - **Map Generation**: 
   - Use noise functions or grid-based approaches for terrain generation.
   - Chunk system to load and unload areas dynamically.
@@ -65,3 +65,4 @@
   - Top down view of surroundings
 - **User Interface**: 
   - Simple and intuitive UI for navigation and interaction.
+  - Add an inventory and the option to equip different items and spells.
