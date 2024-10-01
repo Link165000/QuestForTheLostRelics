@@ -1,41 +1,43 @@
 import socket
-import json
+import threading
+import game_map
+import combat
+import quests
 
-# Client Configuration
-HOST = '127.0.0.1'  # Server IP
-PORT = 12345         # Server Port
+class GameClient:
+    def __init__(self, host, port):
+        self.server_address = (host, port)
+        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket.connect(self.server_address)
 
-# Connect to the server
-def connect_to_server():
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect((HOST, PORT))
+        self.player_data = {}
+        self.map = game_map.GameMap()
 
-    while True:
-        data = client.recv(1024)
-        if not data:
-            break
-        game_state = json.loads(data.decode())
-        print(f"Map: {game_state['map']}")
-        print(f"Quests: {game_state['quests']}")
-        print(f"NPCs available for trading: {game_state['npcs']}")
+        # Start listening to the server
+        threading.Thread(target=self.listen_to_server, daemon=True).start()
 
-        # Sample interaction
-        action = input("Enter action (trade, combat, quest, position): ")
-        if action == "trade":
-            npc = input("Enter NPC name: ")
-            item = input("Enter item to trade: ")
-            client.send(json.dumps({"type": "trade", "npc": npc, "item": item}).encode())
-        elif action == "combat":
-            enemy = input("Enter enemy name: ")
-            client.send(json.dumps({"type": "combat", "enemy": enemy}).encode())
-        elif action == "quest":
-            quest_id = int(input("Enter quest ID: "))
-            client.send(json.dumps({"type": "quest", "quest_id": quest_id}).encode())
-        elif action == "position":
-            position = input("Enter your position (x,y): ")
-            client.send(json.dumps({"type": "position", "position": position}).encode())
+    def listen_to_server(self):
+        while True:
+            data = self.client_socket.recv(1024).decode()
+            self.handle_server_data(data)
 
-    client.close()
+    def handle_server_data(self, data):
+        # Handle incoming data from the server
+        pass
+
+    def send_data(self, data):
+        self.client_socket.sendall(data.encode())
+
+    def move_player(self, direction):
+        self.player_data['direction'] = direction
+        self.send_data(f'MOVE {direction}')
+
+    def combat_action(self, enemy):
+        action = combat.choose_action()
+        self.send_data(f'COMBAT {action} {enemy}')
+
+    def quest_action(self, quest):
+        quests.accept_quest(quest)
 
 if __name__ == "__main__":
-    connect_to_server()
+    client = GameClient("localhost", 12345)
