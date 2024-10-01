@@ -4,6 +4,7 @@
 - **Title**: Quest for the Lost Relics
 - **Genre**: Multiplayer Turn-Based RPG
 - **Platform**: PC (Python with Pygame)
+- **Elden Ring style game**: elden ring style encounters
 
 ## 2. Game Mechanics
 - **Combat System**: 
@@ -23,10 +24,11 @@
 - **Map Design**: 
   - A massive open world (1000x1000) with detailed fog of war.
   - Procedural generation to create diverse terrain types (ice, fire, forest, etc.).
-  - Main map shows details of the current chunk; mini-map shows an overview of the world.
+  - Main map shows details of the current chunk; mini-map shows an overview of the world (could be chunks, could be more open)
 - **Elemental Regions**: 
   - Each region is themed around an elemental type with unique mobs and bosses.
   - Corruption spreads from specific points, affecting the environment and creatures.
+  - Regions denoted by different letters on minimap
 
 ## 4. Lore
 - **Backstory**: 
@@ -40,6 +42,8 @@
 - **Architecture**: 
   - Server-client structure for multiplayer functionality.
   - Consider using Python sockets for networking.
+  - Multiplayer style game - collaboration, raid parties and chat
+  - Raid parties for harder bosses, and 
 - **Map Generation**: 
   - Use noise functions or grid-based approaches for terrain generation.
   - Chunk system to load and unload areas dynamically.
