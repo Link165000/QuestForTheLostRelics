@@ -1,29 +1,24 @@
-import random
+class Character:
+    def __init__(self, name, health, damage):
+        self.name = name
+        self.health = health
+        self.damage = damage
 
-class Combat:
-    def __init__(self, player, enemy):
-        self.player = player
-        self.enemy = enemy
+    def attack(self, other):
+        other.health -= self.damage
+        return f"{self.name} attacks {other.name} for {self.damage} damage!"
 
-    def attack(self):
-        base_damage = random.randint(10, 20)
-        damage = self.apply_elemental_damage(base_damage)
-        self.enemy['health'] -= damage
+    def is_alive(self):
+        return self.health > 0
 
-        print(f"{self.player['name']} attacked {self.enemy['name']} for {damage} damage!")
+# Example Usage
+if __name__ == "__main__":
+    player = Character("Hero", 100, 20)
+    enemy = Character("Goblin", 50, 10)
 
-        if self.enemy['health'] <= 0:
-            print(f"{self.enemy['name']} has been defeated!")
-
-    def apply_elemental_damage(self, base_damage):
-        if self.player['element'] == 'Fire' and self.enemy['element'] == 'Ice':
-            return base_damage * 1.5
-        elif self.player['element'] == 'Ice' and self.enemy['element'] == 'Fire':
-            return base_damage * 0.5
-        return base_damage
-
-    def combo_attack(self):
-        if random.random() < 0.3:  # 30% chance for a combo
-            damage = self.apply_elemental_damage(30)
-            self.enemy['health'] -= damage
-            print(f"{self.player['name']} performed a combo attack on {self.enemy['name']} for {damage} damage!")
+    while player.is_alive() and enemy.is_alive():
+        print(player.attack(enemy))
+        print(f"{enemy.name} health: {enemy.health}")
+        if enemy.is_alive():
+            print(enemy.attack(player))
+            print(f"{player.name} health: {player.health}")
