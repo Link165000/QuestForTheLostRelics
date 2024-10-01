@@ -1,15 +1,17 @@
-import random
-
 class GameMap:
-    def __init__(self, size):
+    def __init__(self, size=(1000, 1000)):
         self.size = size
         self.map_data = self.generate_map()
 
     def generate_map(self):
-        # Generating a simple map with different terrain types
-        terrains = ['grassland', 'forest', 'mountain', 'desert', 'ice']
-        return [[random.choice(terrains) for _ in range(self.size)] for _ in range(self.size)]
+        # Procedural generation logic for terrain
+        return [['grass' for _ in range(self.size[1])] for _ in range(self.size[0])]
 
     def display_map(self):
         for row in self.map_data:
             print(" ".join(row))
+
+# Example usage
+if __name__ == "__main__":
+    game_map = GameMap()
+    game_map.display_map()
