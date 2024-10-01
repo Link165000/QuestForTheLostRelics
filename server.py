@@ -15,6 +15,7 @@ clients = {}
 quest_manager = QuestManager()
 game_map = GameMap(1000, 1000)  # Create a 1000x1000 map
 npcs = [NPC("Merchant", ["Potion", "Sword", "Shield"]) for _ in range(5)]  # NPCs for trading
+players = {}  # To track players and their characters
 
 # Function to handle client connections
 def handle_client(conn, addr):
@@ -51,6 +52,10 @@ def handle_message(addr, message):
         handle_trade(addr, message["npc"], message["item"])
     elif message["type"] == "combat":
         handle_combat(addr, message["enemy"])
+    elif message["type"] == "quest":
+        handle_quest(addr, message["quest_id"])
+    elif message["type"] == "position":
+        update_player_position(addr, message["position"])
 
 def handle_trade(addr, npc_name, item):
     npc = next((npc for npc in npcs if npc.name == npc_name), None)
@@ -61,6 +66,17 @@ def handle_trade(addr, npc_name, item):
 def handle_combat(addr, enemy_name):
     # Logic for combat can be expanded here
     pass
+
+def handle_quest(addr, quest_id):
+    # Logic to handle quests
+    pass
+
+def update_player_position(addr, position):
+    # Update player position on the server
+    if addr in players:
+        players[addr]["position"] = position
+    else:
+        players[addr] = {"position": position}
 
 # Start the server
 def start_server():
