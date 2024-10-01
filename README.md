@@ -7,14 +7,21 @@
 - **Elden Ring style game**: elden ring style gameplay
 
 ## 2. Game Mechanics
+- **Character Creation**:
+  - Player creates either a **party or a character** to play as (yet to decide)
+  - chooses race or allocates stats
+  - stats then required to learn spells or skills
 - **Combat System**: 
   - Turn-based combat allowing for imaginative strategies.
   - Combos and elemental weaknesses will be crucial in battle.
   - Players can join raid parties to tackle larger enemies together.
+  - Discoverable combos
+  - Xp to level up
 - **Leveling System**: 
   - Experience points (XP) per level.
   - Players receive skill points to invest in skills, stats, or spells.
   - Skills require a minimum stat level for learning (e.g., mana for mages).
+  - 
 - **Quests**:
   - Basic quests to start with, evolving into more complex, lore-rich quests.
   - Quests will be categorized by difficulty: Common, Uncommon, Rare, Epic, Legendary.
@@ -37,6 +44,7 @@
   - Players will face both elemental and corrupted versions of bosses.
 - **Quest Integration**: 
   - Uncovering the history of the Cataclysm while combating the corruption.
+  - Lots of discoverable lore
 
 ## 5. Technical Design
 - **Architecture**: 
