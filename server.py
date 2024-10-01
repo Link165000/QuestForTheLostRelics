@@ -1,94 +1,36 @@
 import socket
 import threading
-import json
-from game_map import GameMap
-from quests import QuestManager
-from trading import NPC
-from combat import Character
 
-# Server Configuration
-HOST = '127.0.0.1'  # Localhost
-PORT = 12345         # Port to listen on
+class GameServer:
+    def __init__(self, host, port):
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.bind((host, port))
+        self.server_socket.listen(5)
+        self.clients = []
 
-# Global Variables
-clients = {}
-quest_manager = QuestManager()
-game_map = GameMap(1000, 1000)  # Create a 1000x1000 map
-npcs = [NPC("Merchant", ["Potion", "Sword", "Shield"]) for _ in range(5)]  # NPCs for trading
-players = {}  # To track players and their characters
+        print(f"Server started on {host}:{port}")
 
-# Function to handle client connections
-def handle_client(conn, addr):
-    print(f'New connection: {addr}')
-    clients[addr] = conn
-
-    # Send initial game state
-    conn.send(json.dumps({
-        "map": game_map.map,
-        "quests": quest_manager.quests,
-        "npcs": [npc.name for npc in npcs]
-    }).encode())
-
-    while True:
-        try:
-            data = conn.recv(1024)
+    def handle_client(self, client_socket):
+        while True:
+            data = client_socket.recv(1024)
             if not data:
                 break
-            
-            # Handle incoming data from clients
-            message = json.loads(data.decode())
-            handle_message(addr, message)
-        except Exception as e:
-            print(f"Error: {e}")
-            break
+            self.broadcast(data, client_socket)
 
-    conn.close()
-    del clients[addr]
-    print(f'Connection closed: {addr}')
+        client_socket.close()
 
-# Handle incoming messages from clients
-def handle_message(addr, message):
-    if message["type"] == "trade":
-        handle_trade(addr, message["npc"], message["item"])
-    elif message["type"] == "combat":
-        handle_combat(addr, message["enemy"])
-    elif message["type"] == "quest":
-        handle_quest(addr, message["quest_id"])
-    elif message["type"] == "position":
-        update_player_position(addr, message["position"])
+    def broadcast(self, message, sender_socket):
+        for client in self.clients:
+            if client != sender_socket:
+                client.send(message)
 
-def handle_trade(addr, npc_name, item):
-    npc = next((npc for npc in npcs if npc.name == npc_name), None)
-    if npc:
-        result = npc.trade(item)
-        clients[addr].send(result.encode())
-
-def handle_combat(addr, enemy_name):
-    # Logic for combat can be expanded here
-    pass
-
-def handle_quest(addr, quest_id):
-    # Logic to handle quests
-    pass
-
-def update_player_position(addr, position):
-    # Update player position on the server
-    if addr in players:
-        players[addr]["position"] = position
-    else:
-        players[addr] = {"position": position}
-
-# Start the server
-def start_server():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind((HOST, PORT))
-    server.listen()
-    print(f'Server listening on {HOST}:{PORT}')
-    
-    while True:
-        conn, addr = server.accept()
-        thread = threading.Thread(target=handle_client, args=(conn, addr))
-        thread.start()
+    def start(self):
+        while True:
+            client_socket, addr = self.server_socket.accept()
+            print(f"Connection from {addr}")
+            self.clients.append(client_socket)
+            threading.Thread(target=self.handle_client, args=(client_socket,), daemon=True).start()
 
 if __name__ == "__main__":
-    start_server()
+    server = GameServer("localhost", 12345)
+    server.start()
