@@ -1,99 +1,42 @@
 import random
 
-class Monster:
-    def __init__(self, name, health, experience_value):
-        self.name = name
-        self.health = health
-        self.experience_value = experience_value
+class Combat:
+    def __init__(self, player, enemy):
+        self.player = player
+        self.enemy = enemy
 
-    def take_damage(self, damage):
-        self.health -= damage
-        print(f"{self.name} takes {damage} damage! Remaining health: {self.health}")
+    def choose_action(self):
+        # Placeholder for action selection logic
+        return random.choice(['attack', 'spell', 'combo'])
 
-    def is_alive(self):
-        return self.health > 0
+    def calculate_damage(self, attack_type):
+        base_damage = self.player['attack']
+        if attack_type == 'combo':
+            base_damage *= 2  # Increase damage for combos
+        return base_damage
 
+    def battle(self):
+        while self.player['hp'] > 0 and self.enemy['hp'] > 0:
+            action = self.choose_action()
+            damage = self.calculate_damage(action)
+            self.enemy['hp'] -= damage
+            print(f"{self.player['name']} dealt {damage} to {self.enemy['name']}.")
 
-class Player:
-    def __init__(self, name, player_class):
-        self.name = name
-        self.level = 1
-        self.experience = 0
-        self.skill_points = 0
-        self.stats = {
-            'strength': 5,
-            'intelligence': 5,
-            'agility': 5,
-            'mana': 5,
-            'health': 100,
-        }
-        self.player_class = player_class
-        self.skills = []
-        self.combos = {}
-        self.level_up_threshold = 100  # Example threshold for leveling up
-        self.combo_book = {}
+            if self.enemy['hp'] <= 0:
+                print(f"{self.enemy['name']} has been defeated!")
+                break
+            
+            # Enemy attacks back (basic AI)
+            enemy_damage = self.enemy['attack']
+            self.player['hp'] -= enemy_damage
+            print(f"{self.enemy['name']} dealt {enemy_damage} to {self.player['name']}.")
 
-    def gain_experience(self, amount):
-        self.experience += amount
-        print(f"{self.name} gained {amount} experience!")
-        while self.experience >= self.level_up_threshold:
-            self.level_up()
+            if self.player['hp'] <= 0:
+                print(f"{self.player['name']} has been defeated!")
 
-    def level_up(self):
-        self.level += 1
-        self.experience -= self.level_up_threshold
-        self.skill_points += 3  # Players receive 3 skill points per level
-        self.level_up_threshold += 50  # Increase threshold for next level
-        print(f"{self.name} leveled up to Level {self.level}!")
-
-    def allocate_skill_points(self, stat=None, skill=None):
-        if self.skill_points <= 0:
-            print("No skill points available to allocate.")
-            return
-
-        if stat and stat in self.stats:
-            self.stats[stat] += 1
-            self.skill_points -= 1
-            print(f"Allocated 1 point to {stat}. Total: {self.stats[stat]}")
-
-        elif skill and skill not in self.skills:
-            self.skills.append(skill)
-            self.skill_points -= 1
-            print(f"Unlocked skill: {skill}")
-
-        else:
-            print("Invalid allocation.")
-
-    def learn_combo(self, combo_name, combo_details):
-        self.combo_book[combo_name] = combo_details
-        print(f"Learned combo: {combo_name}")
-
-    def use_combo(self, combo_name, target):
-        if combo_name in self.combo_book:
-            mana_cost = self.combo_book[combo_name]['mana_cost']
-            if self.stats['mana'] >= mana_cost:
-                self.stats['mana'] -= mana_cost
-                damage = self.combo_book[combo_name]['damage']
-                target.take_damage(damage)
-                print(f"{self.name} uses {combo_name} on {target.name} for {damage} damage!")
-            else:
-                print("Not enough mana to use this combo.")
-        else:
-            print("Combo not learned.")
-
-    def show_status(self):
-        print(f"Player Name: {self.name}")
-        print(f"Level: {self.level} | Experience: {self.experience}/{self.level_up_threshold}")
-        print(f"Skill Points Available: {self.skill_points}")
-        print("Stats:")
-        for stat, value in self.stats.items():
-            print(f"{stat.capitalize()}: {value}")
-        print("Skills:", ", ".join(self.skills) if self.skills else "None")
-        print("Combos:", ", ".join(self.combo_book.keys()) if self.combo_book else "None")
-
-    def attack(self, monster):
-        damage = self.stats['strength'] + random.randint(1, 5)  # Example damage calculation
-        monster.take_damage(damage)
-        if not monster.is_alive():
-            print(f"{monster.name} has been defeated!")
-            self.gain_experience(monster.experience_value)
+# Example usage
+if __name__ == "__main__":
+    player = {'name': 'Hero', 'hp': 100, 'attack': 10}
+    enemy = {'name': 'Goblin', 'hp': 50, 'attack': 5}
+    combat = Combat(player, enemy)
+    combat.battle()
