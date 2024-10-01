@@ -1,89 +1,79 @@
 import random
 
-class Character:
-    def __init__(self, name, max_health, mana, attack, defense):
+class Monster:
+    def __init__(self, name, health, experience_value):
         self.name = name
-        self.max_health = max_health
-        self.health = max_health
-        self.mana = mana
-        self.attack = attack
-        self.defense = defense
-        self.combos = []  # Combos currently known
-        self.combo_book = {}  # Store discovered combos with reduced mana cost
-        self.status_effects = []
+        self.health = health
+        self.experience_value = experience_value
 
     def take_damage(self, damage):
         self.health -= damage
-        if self.health < 0:
-            self.health = 0
+        print(f"{self.name} takes {damage} damage! Remaining health: {self.health}")
 
-    def heal(self, amount):
-        self.health += amount
-        if self.health > self.max_health:
-            self.health = self.max_health
+    def is_alive(self):
+        return self.health > 0
 
-    def cast_spell(self, spell):
-        if self.mana >= spell.mana_cost:
-            self.mana -= spell.mana_cost
-            return spell.effect(self)
+
+class Player:
+    def __init__(self, name, player_class):
+        self.name = name
+        self.level = 1
+        self.experience = 0
+        self.skill_points = 0
+        self.stats = {
+            'strength': 5,
+            'intelligence': 5,
+            'agility': 5,
+            'mana': 5,
+            'health': 100,
+        }
+        self.player_class = player_class
+        self.skills = []
+        self.level_up_threshold = 100  # Example threshold for leveling up
+
+    def gain_experience(self, amount):
+        self.experience += amount
+        print(f"{self.name} gained {amount} experience!")
+        while self.experience >= self.level_up_threshold:
+            self.level_up()
+
+    def level_up(self):
+        self.level += 1
+        self.experience -= self.level_up_threshold
+        self.skill_points += 3  # Players receive 3 skill points per level
+        self.level_up_threshold += 50  # Increase threshold for next level
+        print(f"{self.name} leveled up to Level {self.level}!")
+
+    def allocate_skill_points(self, stat=None, skill=None):
+        if self.skill_points <= 0:
+            print("No skill points available to allocate.")
+            return
+
+        if stat and stat in self.stats:
+            self.stats[stat] += 1
+            self.skill_points -= 1
+            print(f"Allocated 1 point to {stat}. Total: {self.stats[stat]}")
+
+        elif skill and skill not in self.skills:
+            self.skills.append(skill)
+            self.skill_points -= 1
+            print(f"Unlocked skill: {skill}")
+
         else:
-            print(f"{self.name} does not have enough mana to cast {spell.name}!")
+            print("Invalid allocation.")
 
-    def discover_combo(self, combo):
-        if combo.name not in self.combo_book:
-            # Add the combo to the combo book with reduced mana cost
-            reduced_cost = combo.mana_cost // 2  # Reduce the cost by half
-            self.combo_book[combo.name] = reduced_cost
-            print(f"{self.name} has discovered the combo: {combo.name}!")
+    def show_status(self):
+        print(f"Player Name: {self.name}")
+        print(f"Level: {self.level} | Experience: {self.experience}/{self.level_up_threshold}")
+        print(f"Skill Points Available: {self.skill_points}")
+        print("Stats:")
+        for stat, value in self.stats.items():
+            print(f"{stat.capitalize()}: {value}")
+        print("Skills:", ", ".join(self.skills) if self.skills else "None")
 
-class Spell:
-    def __init__(self, name, mana_cost, effect):
-        self.name = name
-        self.mana_cost = mana_cost
-        self.effect = effect
-
-class Combat:
-    def __init__(self):
-        self.active_combos = []
-
-    def add_combo(self, combo):
-        self.active_combos.append(combo)
-
-    def perform_combo(self, attacker, defender, combo):
-        if all(skill in attacker.combos for skill in combo.skills):
-            total_damage = sum(combo.damage)
-            defender.take_damage(total_damage)
-            print(f"{attacker.name} performed {combo.name} for {total_damage} damage!")
-            attacker.discover_combo(combo)  # Discover the combo after performing it
-
-class Combo:
-    def __init__(self, name, skills, damage, mana_cost):
-        self.name = name
-        self.skills = skills
-        self.damage = damage
-        self.mana_cost = mana_cost
-
-# Example spells
-fireball = Spell("Fireball", 10, lambda caster: caster.attack * 2)
-heal = Spell("Heal", 5, lambda caster: caster.heal(20))
-
-# Example combos
-fire_combo = Combo("Fire Combo", ["Fireball", "Basic Attack"], [20, 10], 15)
-water_combo = Combo("Water Blast", ["Water Spell", "Basic Attack"], [25, 5], 20)
-
-# Example characters
-hero = Character("Hero", 100, 50, 15, 5)
-monster = Character("Monster", 80, 30, 10, 3)
-
-# Example usage
-combat = Combat()
-combat.add_combo(fire_combo)
-combat.add_combo(water_combo)
-
-hero.cast_spell(fireball)
-combat.perform_combo(hero, monster, fire_combo)
-
-# Check discovered combos and their reduced mana costs
-print("Discovered Combos:")
-for combo_name, cost in hero.combo_book.items():
-    print(f"{combo_name}: {cost} mana cost")
+    def attack(self, monster):
+        damage = self.stats['strength'] + random.randint(1, 5)  # Example damage calculation
+        monster.take_damage(damage)
+        if not monster.is_alive():
+            print(f"{monster.name} has been defeated!")
+            self.gain_experience(monster.experience_value)
