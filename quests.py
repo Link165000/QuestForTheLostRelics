@@ -5,7 +5,7 @@ class Quest:
         self.target_type = target_type
         self.target_amount = target_amount
         self.progress = 0
-        self.reward = reward  # Experience or items
+        self.reward = reward
 
     def update_progress(self):
         self.progress += 1
