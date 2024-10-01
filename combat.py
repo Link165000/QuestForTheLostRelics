@@ -23,7 +23,7 @@ class Combat:
         return base_damage
 
     def combo_attack(self):
-        if random.random() < 0.3:
+        if random.random() < 0.3:  # 30% chance for a combo
             damage = self.apply_elemental_damage(30)
             self.enemy['health'] -= damage
             print(f"{self.player['name']} performed a combo attack on {self.enemy['name']} for {damage} damage!")
