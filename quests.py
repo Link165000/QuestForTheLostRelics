@@ -18,3 +18,9 @@ class Quest:
     def complete(self):
         print(f"Quest Completed: {self.name}! Reward: {self.reward} XP")
         return self.reward
+
+def get_available_quests():
+    return [
+        Quest("Slay Goblins", "Defeat 5 Goblins", "Goblin", 5, 50),
+        Quest("Collect Herbs", "Gather 10 Healing Herbs", "Herb", 10, 30)
+    ]
