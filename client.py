@@ -20,7 +20,7 @@ def connect_to_server():
         print(f"NPCs available for trading: {game_state['npcs']}")
 
         # Sample interaction
-        action = input("Enter action (trade, combat): ")
+        action = input("Enter action (trade, combat, quest, position): ")
         if action == "trade":
             npc = input("Enter NPC name: ")
             item = input("Enter item to trade: ")
@@ -28,6 +28,12 @@ def connect_to_server():
         elif action == "combat":
             enemy = input("Enter enemy name: ")
             client.send(json.dumps({"type": "combat", "enemy": enemy}).encode())
+        elif action == "quest":
+            quest_id = int(input("Enter quest ID: "))
+            client.send(json.dumps({"type": "quest", "quest_id": quest_id}).encode())
+        elif action == "position":
+            position = input("Enter your position (x,y): ")
+            client.send(json.dumps({"type": "position", "position": position}).encode())
 
     client.close()
 
