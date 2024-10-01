@@ -1,18 +1,12 @@
 class Quest:
-    def __init__(self, title, description, difficulty, experience_reward):
+    def __init__(self, title, description, difficulty):
         self.title = title
         self.description = description
         self.difficulty = difficulty
         self.completed = False
-        self.experience_reward = experience_reward
 
-    def complete(self):
+    def complete_quest(self):
         self.completed = True
-        return self.experience_reward
-
-    def __str__(self):
-        return f"{self.title} (Difficulty: {self.difficulty}) - {self.description}"
-
 
 class QuestManager:
     def __init__(self):
@@ -21,14 +15,14 @@ class QuestManager:
     def add_quest(self, quest):
         self.quests.append(quest)
 
-    def complete_quest(self, quest):
-        if quest.completed:
-            print("Quest already completed.")
-            return 0
-
-        experience_gained = quest.complete()
-        return experience_gained
-
     def show_quests(self):
         for quest in self.quests:
-            print(quest)
+            status = "Completed" if quest.completed else "Incomplete"
+            print(f"{quest.title} - {status}")
+
+# Example usage
+if __name__ == "__main__":
+    quest_manager = QuestManager()
+    quest1 = Quest("Defeat the Goblin", "Find and defeat the goblin in the forest.", "Common")
+    quest_manager.add_quest(quest1)
+    quest_manager.show_quests()
