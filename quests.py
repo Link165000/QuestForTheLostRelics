@@ -1,26 +1,24 @@
 class Quest:
-    def __init__(self, name, description, target_type, target_amount, reward):
-        self.name = name
+    def __init__(self, id, description, reward, difficulty):
+        self.id = id
         self.description = description
-        self.target_type = target_type
-        self.target_amount = target_amount
-        self.progress = 0
         self.reward = reward
+        self.difficulty = difficulty
 
-    def update_progress(self):
-        self.progress += 1
-        if self.is_complete():
-            return self.complete()
+class QuestManager:
+    def __init__(self):
+        self.quests = self.generate_quests()
 
-    def is_complete(self):
-        return self.progress >= self.target_amount
+    def generate_quests(self):
+        return [
+            Quest(1, "Collect 5 herbs", "50 gold", "Common"),
+            Quest(2, "Defeat 3 goblins", "100 gold", "Uncommon"),
+            Quest(3, "Find the hidden treasure", "150 gold", "Rare"),
+            Quest(4, "Slay the Ice Dragon", "500 gold", "Legendary"),
+        ]
 
-    def complete(self):
-        print(f"Quest Completed: {self.name}! Reward: {self.reward} XP")
-        return self.reward
-
-def get_available_quests():
-    return [
-        Quest("Slay Goblins", "Defeat 5 Goblins", "Goblin", 5, 50),
-        Quest("Collect Herbs", "Gather 10 Healing Herbs", "Herb", 10, 30)
-    ]
+# Example Usage
+if __name__ == "__main__":
+    quest_manager = QuestManager()
+    for quest in quest_manager.quests:
+        print(quest.description)
