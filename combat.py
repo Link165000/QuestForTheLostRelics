@@ -16,6 +16,7 @@ class Character:
         self.spells = {
             "Fireball": (30, 15),       # (damage, mana cost)
             "Heal": (-20, 10),          # Healing spell (negative damage)
+            "Lightning Bolt": (40, 20), # High damage spell
         }
         self.skills = {
             "Shield Bash": (15, 5),     # (damage, mana cost)
