@@ -29,7 +29,9 @@ class Player:
         }
         self.player_class = player_class
         self.skills = []
+        self.combos = {}
         self.level_up_threshold = 100  # Example threshold for leveling up
+        self.combo_book = {}
 
     def gain_experience(self, amount):
         self.experience += amount
@@ -62,6 +64,23 @@ class Player:
         else:
             print("Invalid allocation.")
 
+    def learn_combo(self, combo_name, combo_details):
+        self.combo_book[combo_name] = combo_details
+        print(f"Learned combo: {combo_name}")
+
+    def use_combo(self, combo_name, target):
+        if combo_name in self.combo_book:
+            mana_cost = self.combo_book[combo_name]['mana_cost']
+            if self.stats['mana'] >= mana_cost:
+                self.stats['mana'] -= mana_cost
+                damage = self.combo_book[combo_name]['damage']
+                target.take_damage(damage)
+                print(f"{self.name} uses {combo_name} on {target.name} for {damage} damage!")
+            else:
+                print("Not enough mana to use this combo.")
+        else:
+            print("Combo not learned.")
+
     def show_status(self):
         print(f"Player Name: {self.name}")
         print(f"Level: {self.level} | Experience: {self.experience}/{self.level_up_threshold}")
@@ -70,6 +89,7 @@ class Player:
         for stat, value in self.stats.items():
             print(f"{stat.capitalize()}: {value}")
         print("Skills:", ", ".join(self.skills) if self.skills else "None")
+        print("Combos:", ", ".join(self.combo_book.keys()) if self.combo_book else "None")
 
     def attack(self, monster):
         damage = self.stats['strength'] + random.randint(1, 5)  # Example damage calculation
