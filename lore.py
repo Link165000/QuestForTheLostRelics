@@ -1,16 +1,16 @@
-class Lore:
+class LoreEntry:
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+class LoreManager:
     def __init__(self):
-        self.stories = self.create_lore()
+        self.entries = []
 
-    def create_lore(self):
-        return {
-            "origin": "In the beginning, the world was created by ancient elemental forces...",
-            "heroes": "Legends speak of heroes who harnessed the power of the elements...",
-            "dangers": "But dark forces lurk in the shadows, waiting to unleash chaos..."
-        }
+    def add_entry(self, entry):
+        self.entries.append(entry)
 
-# Example Usage
-if __name__ == "__main__":
-    lore = Lore()
-    for key, value in lore.stories.items():
-        print(f"{key}: {value}")
+    def display_lore(self):
+        print("Lore Entries:")
+        for entry in self.entries:
+            print(f"{entry.title}: {entry.content}")
