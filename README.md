@@ -4,7 +4,7 @@
 - **Title**: Quest for the Lost Relics
 - **Genre**: Multiplayer Turn-Based RPG
 - **Platform**: PC (Python with Pygame)
-- **Elden Ring style game**: elden ring style encounters
+- **Elden Ring style game**: elden ring style gameplay
 
 ## 2. Game Mechanics
 - **Combat System**: 
@@ -54,5 +54,6 @@
 ## 6. Art Style
 - **ASCII Art**: 
   - Use ASCII art for characters, creatures, and environments for a text-based experience.
+  - Top down view of surroundings
 - **User Interface**: 
   - Simple and intuitive UI for navigation and interaction.
