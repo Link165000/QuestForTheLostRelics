@@ -4,7 +4,7 @@
 - **Title**: Quest for the Lost Relics
 - **Genre**: Multiplayer Turn-Based RPG
 - **Platform**: PC (Python with Pygame)
-- **Elden Ring style game**: elden ring style gameplay
+- **Elden Ring style story**: top down Elden ring style story
 
 ## 2. Game Mechanics
 - **Character Creation**:
