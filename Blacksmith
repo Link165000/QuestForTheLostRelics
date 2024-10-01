@@ -1,0 +1,98 @@
+### Town
+
+gold = 100
+inventory = ['basic armour']
+
+# Inventory for blacksmith
+blacksmith_inventory = {
+    'iron sword': {'price': 50, 'damage': 10},
+    'steel shield': {'price': 75, 'defense': 15}
+}
+
+
+
+def Help():
+    print("you suck")
+
+def square():
+    SquarePlaces = str(input('Potions and Lotions (P), Healer (H), Blacksmith (B)'))
+    if SquarePlaces == "P":
+        Potions()
+    elif SquarePlaces == "H":
+        Healer()
+    elif SquarePlaces == "B":
+        Blacksmith()
+
+
+
+# Function to display the blacksmith's inventory
+def Blacksmith():
+    items = "Welcome to the Blacksmith! Here are the available items:\n"
+    for item, details in blacksmith_inventory.items():
+        stat_type = 'damage' if 'damage' in details else 'defense'
+        items += f"{item}: {details['price']} gold - {stat_type.capitalize()}: {details[stat_type]}\n"
+    return items
+
+# Function to buy an item from the blacksmith
+def buy_blacksmith_item(player, item_name):
+    if item_name in blacksmith_inventory:
+        item = blacksmith_inventory[item_name]
+        if player['gold'] >= item['price']:
+            player['gold'] -= item['price']
+            player['inventory'].append(item_name)
+            return f"You bought {item_name} for {item['price']} gold!"
+        else:
+            return "You don't have enough gold!"
+    else:
+        return "Item not found."
+
+# Function to interact with the blacksmith
+def visit_blacksmith(player):
+    print(Blacksmith())
+    item = input("Enter the item you want to buy or (L) to leave: ")
+    if item != "L":
+        result = buy_blacksmith_item(player, item)
+        print(result)
+
+def load_player(name, gold, inventory):
+    return {
+        'name': name,
+        'gold': gold,  # You can change this value to test purchases
+        'inventory': [inventory]
+    }
+
+
+        
+    
+if __name__ == '__main__':
+    # Create a player for testing
+    player = load_player("Hero", 100, inventory)
+    
+    # Places in town
+while True:
+    print("Town Square (T)', 'Fighting arena (F)', 'Magic School (M), ")
+    Places = str(input('Leave(L) and Help(H): '))
+    if Places == "T":
+        square()
+    elif Places == "F":
+        Fight()
+    elif Places == "M":
+        Magic()
+    elif Places == "L":
+        print("Goodbye")
+        break
+    elif Places == "H":
+        Help()
+
+    # Show player's initial gold and inventory
+    print(f"You have {player['gold']} gold and {player['inventory']} in your inventory")
+    
+    # Interact with the blacksmith
+    visit_blacksmith(player)
+    
+    # Show player's updated inventory and gold after shopping
+    print(f"\nYour inventory: {player['inventory']}")
+    print(f"Gold: {player['gold']}")
+
+
+
