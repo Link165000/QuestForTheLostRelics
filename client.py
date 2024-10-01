@@ -32,6 +32,7 @@ threading.Thread(target=receive_messages).start()
 # Player attributes
 player_position = [400, 300]
 player_health = 100
+player_quests = []
 
 # Simple map generation
 map_size = 20
@@ -56,6 +57,10 @@ while running:
         client.send("MOVE,DOWN".encode('utf-8'))
     if keys[pygame.K_SPACE]:  # Press space to attack
         client.send(f"COMBAT,{addr}".encode('utf-8'))
+    if keys[pygame.K_q]:  # Press Q to accept a quest
+        client.send("QUEST,Defeat the Goblin".encode('utf-8'))
+    if keys[pygame.K_s]:  # Press S to check quest status
+        client.send("STATUS".encode('utf-8'))
 
     # Draw the game state
     screen.fill((0, 0, 0))  # Clear the screen
@@ -76,4 +81,3 @@ while running:
 
 client.close()
 pygame.quit()
-
