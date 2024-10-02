@@ -5,13 +5,20 @@ inventory = ['basic armour']
 
 # Inventory for blacksmith
 blacksmith_inventory = {
-    'iron sword': {'price': 50, 'damage': 10},
-    'wooden shield': {'price': 15, 'defense': 5},
-    'steel shield': {'price': 75, 'defense': 15},
-    'wooden bow': {'price': 50, 'range': 15},
-    'wooden arrow': {'price': 5, 'damage': 5},
+    'iron sword': {'rarity': common, 'price': 50, 'damage': 10},
+    'wooden shield': {'rarity': common, 'price': 15, 'defense': 5},
+    'steel shield': {'rarity': uncommon, 'price': 75, 'defense': 15},
+    'wooden bow': {'rarity': common, 'price': 50, 'range': 15},
+    'wooden arrow': {'rarity': common, 'price': 5, 'damage': 5},
 }
 
+potion_inventory = {
+    'health potion': {'rarity': uncommon, 'price': 30, 'heal': 10
+}
+
+
+def Inventory():
+    print(player['inventory'], "and", gold, "gold")
 
 
 def Help():
@@ -29,6 +36,9 @@ def square():
         Blacksmith()
 
 
+# -----------
+# Shops in square
+# -----------
 
 # Function to display the blacksmith's inventory
 def Blacksmith():
@@ -57,6 +67,35 @@ def visit_blacksmith(player):
     item = input("Enter the item you want to buy or (L) to leave: ")
     if item != "L":
         result = buy_blacksmith_item(player, item)
+        print(result)
+
+
+def Potions():
+    items = "Welcome to the Potion shop! Here are the available items:\n"
+    for item, details in blacksmith_inventory.items():
+        stat_type = 'damage' if 'damage' in details else 'defense'
+        items += f"{item}: {details['price']} gold - {stat_type.capitalize()}: {details[stat_type]}\n"
+    return items
+
+# Function to buy an item from the blacksmith
+def buy_potion_item(player, item_name):
+    if item_name in potion_inventory:
+        item = potion_inventory[item_name]
+        if player['gold'] >= item['price']:
+            player['gold'] -= item['price']
+            player['inventory'].append(item_name)
+            return f"You bought {item_name} for {item['price']} gold!"
+        else:
+            return "You don't have enough gold!"
+    else:
+        return "Item not found."
+
+# Function to interact with the blacksmith
+def visit_potions(player):
+    print(Potions())
+    item = input("Enter the item you want to buy or (L) to leave: ")
+    if item != "L":
+        result = buy_potion_item(player, item)
         print(result)
 
 def load_player(name, gold, inventory):
@@ -88,16 +127,10 @@ while True:
         break
     elif Places == "H":
         Help()
+    elif Places == "I":
+        Inventory()
 
-    # Show player's initial gold and inventory
-    print(f"You have {player['gold']} gold and {player['inventory']} in your inventory")
-    
-    # Interact with the blacksmith
-    visit_blacksmith(player)
-    
-    # Show player's updated inventory and gold after shopping
-    print(f"\nYour inventory: {player['inventory']}")
-    print(f"Gold: {player['gold']}")
+
 
 
 
