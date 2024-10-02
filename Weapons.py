@@ -26,7 +26,7 @@ def starter_bow():
     spread = 1
    
 def intermediate_sword():
-    damage_delt = 5
+    damage_delt = 3
     exp_given = 2
     health_regen = 0
     spread = 1
@@ -41,25 +41,11 @@ def intermediate_bow():
 def scyth():
     damage_delt = 20
     exp_given = 10
-    health_regen = 20
-    spread = 5
+    health_regen = 10
+    spread = 3
 
 def katana():
-    damage_delt = 50
-    exp_given = 30
-    health_regen = 15
-    spread = 10
-    
-def pistol():
-    damage_delt = 30
-    range_of = 50
-    exp_given = 25
-    health_regen = 10
-    spread = 1
-    
-def shotgun():
-    damage_delt = 60
-    range_of = 20
+    damage_delt = 10
     exp_given = 30
     health_regen = 15
     spread = 5
