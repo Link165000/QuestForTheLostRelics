@@ -13,7 +13,8 @@ blacksmith_inventory = {
 }
 
 potion_inventory = {
-    'health potion': {'rarity': uncommon, 'price': 30, 'heal': 10
+    'health potion': {'rarity': common, 'price': 30, 'heal': 10
+    'big health potion': {'rarity': uncommon, 'price': 40, 'heal': 20
 }
 
 
@@ -25,6 +26,7 @@ def Help():
     print("write P for potions")
     print("write H for the healer")
     print("write B for the blacksmith")
+    print()
 
 def square():
     SquarePlaces = str(input('Potions and Lotions (P), Healer (H), Blacksmith (B)'))
