@@ -8,6 +8,7 @@
 #   damage_delt = obv
 #   range_of = how far it shoots
 #   exp_given = obv
+#   do we need this? the exp - shouldn't xp be from mobs?
 #   health_regen = if the weapon heals you
 #   spread = how many monsters damaged at a time
 
