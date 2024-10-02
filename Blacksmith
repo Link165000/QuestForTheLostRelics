@@ -6,13 +6,18 @@ inventory = ['basic armour']
 # Inventory for blacksmith
 blacksmith_inventory = {
     'iron sword': {'price': 50, 'damage': 10},
-    'steel shield': {'price': 75, 'defense': 15}
+    'wooden shield': {'price': 15, 'defense': 5},
+    'steel shield': {'price': 75, 'defense': 15},
+    'wooden bow': {'price': 50, 'range': 15},
+    'wooden arrow': {'price': 5, 'damage': 5},
 }
 
 
 
 def Help():
-    print("you suck")
+    print("write P for potions")
+    print("write H for the healer")
+    print("write B for the blacksmith")
 
 def square():
     SquarePlaces = str(input('Potions and Lotions (P), Healer (H), Blacksmith (B)'))
