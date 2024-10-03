@@ -8,8 +8,8 @@
 
 ## 2. Game Mechanics
 - **Character Creation**:
-  - Player creates either a **party or a character** to play as (yet to decide)
-  - chooses race or allocates stats
+  - Player creates a character
+  - chooses race and allocates stats
   - stats then required to learn spells or skills
 - **Combat System**: 
   - Turn-based combat allowing for imaginative strategies.
@@ -21,10 +21,10 @@
   - Experience points (XP) per level.
   - Players receive skill points to invest in skills, stats, or spells.
   - Skills require a minimum stat level for learning (e.g., mana for mages).
-  - 
+    
 - **Quests**:
   - Basic quests to start with, evolving into more complex, lore-rich quests.
-  - Quests will be categorized by difficulty: Common, Uncommon, Rare, Epic, Legendary.
+  - Quests will be categorized by rank: F, E, D, C, B, A, S, SS, SSS and Unique
   - Include faction-based quests tied to the overarching storyline.
 
 ## 3. World Structure
