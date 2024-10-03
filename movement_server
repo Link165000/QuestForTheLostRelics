@@ -62,7 +62,10 @@ def display_map():
 def broadcast_map():
     map_data = "\n".join([" ".join(row) for row in display_map()])
     for client in clients:
-        client.sendall(map_data.encode())
+        try:
+            client.sendall(map_data.encode())
+        except:
+            pass  # Handle potential disconnection gracefully
 
 # Handle each client
 def handle_client(client, address):
@@ -72,7 +75,10 @@ def handle_client(client, address):
     players[name] = (4, 4)  # Default position
     player_color_map[name] = player_colors[len(players) % len(player_colors)]  # Assign color
 
-    # Send map updates
+    # Send initial map update
+    broadcast_map()
+
+    # Listen for player movement
     while True:
         try:
             data = client.recv(1024).decode()
@@ -83,9 +89,11 @@ def handle_client(client, address):
         except:
             break
 
+    print(f"{name} has disconnected.")
     client.close()
     del players[name]
     del player_color_map[name]
+    broadcast_map()  # Update others when someone leaves
 
 # Server setup
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
