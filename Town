@@ -5,16 +5,16 @@ inventory = ['basic armour']
 
 # Inventory for blacksmith
 blacksmith_inventory = {
-    'iron sword': {'rarity': common, 'price': 50, 'damage': 10},
-    'wooden shield': {'rarity': common, 'price': 15, 'defense': 5},
-    'steel shield': {'rarity': uncommon, 'price': 75, 'defense': 15},
-    'wooden bow': {'rarity': common, 'price': 50, 'range': 15},
-    'wooden arrow': {'rarity': common, 'price': 5, 'damage': 5},
+    'iron sword': {'rarity': F, 'price': 50, 'damage': 10},
+    'wooden shield': {'rarity': F, 'price': 15, 'defense': 5},
+    'steel shield': {'rarity': E, 'price': 75, 'defense': 15},
+    'wooden bow': {'rarity': F, 'price': 50, 'range': 15},
+    'wooden arrow': {'rarity': F, 'price': 5, 'damage': 5},
 }
 
 potion_inventory = {
-    'health potion': {'rarity': common, 'price': 30, 'heal': 10
-    'big health potion': {'rarity': uncommon, 'price': 40, 'heal': 20
+    'health potion': {'rarity': F, 'price': 30, 'heal': 10
+    'big health potion': {'rarity': E, 'price': 40, 'heal': 20
 }
 
 
