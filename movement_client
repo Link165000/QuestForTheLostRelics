@@ -10,13 +10,17 @@ def display_map(map_data):
 # Function to receive map data from server
 def receive_map(client_socket):
     while True:
-        map_data = client_socket.recv(1024).decode()
-        display_map(map_data)
+        try:
+            map_data = client_socket.recv(1024).decode()
+            display_map(map_data)
+        except ConnectionResetError:
+            print("Connection to the server was lost.")
+            break
 
 # Main client function
 def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('10.100.2.115', 12345))
+    client_socket.connect(('localhost', 12345))
 
     # Get player name
     player_name = input("Enter your player name: ")
@@ -28,6 +32,9 @@ def main():
     # Send movement commands
     while True:
         move = input("Move (W=up, A=left, S=down, D=right): ").upper()
-        client_socket.sendall(move.encode())
+        if move in ['W', 'A', 'S', 'D']:
+            client_socket.sendall(move.encode())
+        else:
+            print("Invalid move. Please use W, A, S, or D.")
 
 main()
