@@ -86,6 +86,8 @@ Arcane: {self.stats['arcane']}""")
                 print("You died")
                 print("Skill issue")
                 quit()
+                
+            
 
 # Probably won't add. Just stole stuff from Elden Ring
 # Could maybe change the name to ally or something

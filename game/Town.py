@@ -1,6 +1,7 @@
 ### Town
 
 import time
+from Character import fight
 
 gold = 100
 inventory = 'basic armour'
@@ -159,8 +160,33 @@ def Healer(player):
             print("Your health is maxed")
             break
     print("Thank you for visiting the healer")
+    
+    
+    
+class MagicSchool:
+    def __init__(self, name, subjects):
+        self.name = name
+        self.subjects = subjects
+        self.students = []
 
+    def enroll_student(self, player_name):
+        self.students.append(player_name)
+        print(f"{player_name} has been enrolled in {self.name}.")
 
+    def list_subjects(self):
+        print(f"Subjects offered at {self.name}:")
+        for subject in self.subjects:
+            print(f"- {subject}")
+
+def create_magic_school(player_name):
+    
+    arcane_sanctum = MagicSchool("Arcane Sanctum", ["Elemental Magic", "Potion Brewing", "Mystical Creatures"])
+    
+    
+    arcane_sanctum.enroll_student(['name'])
+    
+    
+    arcane_sanctum.list_subjects()
 
 
 def load_player(name, gold, inventory):
@@ -184,9 +210,9 @@ while True:
     if Places == "T":
         square()
     elif Places == "'F'":
-        Fight()
+        fight()
     elif Places == "M":
-        Magic()
+        create_magic_school(player)
     elif Places == "L":
         print("Goodbye")
         break
