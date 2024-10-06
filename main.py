@@ -1,6 +1,6 @@
 from authentication.auth import register_user, login_user
 
-# Example login flow
+
 def main():
     print("Welcome to Quest for the Lost Relics!")
     
