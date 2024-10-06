@@ -1,3 +1,10 @@
+#main code file, import any other function from file here
+# e.g. from Town import blacksmith or something
+#if tryna import from another folder do as i did down belolw
+#                  || 
+#                  \/
+
+
 from authentication.auth import register_user, login_user
 
 
