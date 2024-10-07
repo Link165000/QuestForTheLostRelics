@@ -18,7 +18,7 @@ def receive_map(client_socket):
             break
 
 # Main client function
-def main():
+def client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect(('10.100.2.113', 12345))
 
@@ -37,4 +37,4 @@ def main():
         else:
             print("Invalid move. Please use W, A, S, or D.")
 
-main()
+client()
