@@ -7,15 +7,21 @@ def display_map(map_data):
     print(map_data)
     print("-" * 22)
 
-# Function to receive map data from server
 def receive_map(client_socket):
     while True:
         try:
             map_data = client_socket.recv(1024).decode()
-            display_map(map_data)
+            if map_data:
+                display_map(map_data)
+            else:
+                print("No data received, server may have closed connection.")
+                break
         except ConnectionResetError:
             print("Connection to the server was lost.")
             break
+        except socket.timeout:
+            print("Receiving map timed out, trying again...")
+            continue
 
 # Main client function
 def client():
