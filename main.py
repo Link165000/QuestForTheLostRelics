@@ -6,7 +6,6 @@
 
 
 from authentication.auth import register_user, login_user
-from game.movement_client import display_map, receive_map, client
 
 
 def main():
@@ -23,7 +22,6 @@ def main():
         password = input("Enter your password: ")
         if login_user(username, password):
             print(f"Welcome back, {username}!")
-            client()
         else:
             print("Login failed.")
     else:
