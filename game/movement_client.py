@@ -26,7 +26,7 @@ def receive_map(client_socket):
 # Main client function
 def client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('10.100.2.113', 12345))
+    client_socket.connect(('10.100.2.115', 12345))
     client_socket.settimeout(5)  # 5 seconds timeout for example
 
     # Get player name
