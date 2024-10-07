@@ -251,7 +251,3 @@ while True:
         Help(player)
     elif Places == "I":
         Inventory(player)
-
-
-
-
