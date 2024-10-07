@@ -22,7 +22,6 @@ def main():
         password = input("Enter your password: ")
         if login_user(username, password):
             print(f"Welcome back, {username}!")
-            client()
         else:
             print("Login failed.")
     else:
