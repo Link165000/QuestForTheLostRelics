@@ -20,7 +20,7 @@ def receive_map(client_socket):
 # Main client function
 def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('192.168.178.237', 12345))
+    client_socket.connect(('10.100.2.113', 12345))
 
     # Get player name
     player_name = input("Enter your player name: ")
