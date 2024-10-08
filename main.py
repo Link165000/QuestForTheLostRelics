@@ -6,7 +6,7 @@
 
 
 from authentication.auth import register_user, login_user
-
+from game.movement_client import display_map, receive_map, client
 
 def main():
     print("Welcome to Quest for the Lost Relics!")

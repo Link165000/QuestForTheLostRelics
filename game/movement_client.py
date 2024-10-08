@@ -7,20 +7,27 @@ def display_map(map_data):
     print(map_data)
     print("-" * 22)
 
-# Function to receive map data from server
 def receive_map(client_socket):
     while True:
         try:
             map_data = client_socket.recv(1024).decode()
-            display_map(map_data)
+            if map_data:
+                display_map(map_data)
+            else:
+                print("No data received, server may have closed connection.")
+                break
         except ConnectionResetError:
             print("Connection to the server was lost.")
             break
+        except socket.timeout:
+            print("Receiving map timed out, trying again...")
+            continue
 
 # Main client function
-def main():
+def client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('192.168.178.237', 12345))
+    client_socket.connect(('10.100.2.115', 12345))
+    client_socket.settimeout(5)  # 5 seconds timeout for example
 
     # Get player name
     player_name = input("Enter your player name: ")
@@ -37,4 +44,4 @@ def main():
         else:
             print("Invalid move. Please use W, A, S, or D.")
 
-main()
+client()

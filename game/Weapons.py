@@ -38,7 +38,7 @@ def intermediate_bow():
     health_regen = 0
     spread = 1
 
-def scyth():
+def scythe():
     damage_delt = 20
     exp_given = 10
     health_regen = 10
