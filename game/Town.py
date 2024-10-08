@@ -1,11 +1,9 @@
 ### Town
 
 import time
-<<<<<<< HEAD
 from Character import fight
-=======
 import random
->>>>>>> d1c181ecd290a9e4f31a66b5bf9cb4641754a418
+
 
 gold = 100
 inventory = ['basic armour']
@@ -138,8 +136,8 @@ def Healer(player):
         else:
             print("Your health is maxed")
             break
-<<<<<<< HEAD
-    print("Thank you for visiting the healer")
+
+print("Thank you for visiting the healer")
     
     
     
@@ -148,7 +146,7 @@ class MagicSchool:
         self.name = name
         self.subjects = subjects
         self.students = []
-=======
+
 
 
 def load_player(name, gold, inventory):
@@ -231,7 +229,7 @@ def Magic(player):
             break
         else:
             print("Invalid spell choice.")
->>>>>>> d1c181ecd290a9e4f31a66b5bf9cb4641754a418
+
 
     def enroll_student(self, player_name):
         self.students.append(player_name)
@@ -274,15 +272,15 @@ while True:
     if Places == "T":
         square(player)
     elif Places == "'F'":
-<<<<<<< HEAD
+
         fight()
     elif Places == "M":
         create_magic_school(player)
-=======
+
         Fight(player)
     elif Places == "M":
         Magic(player)
->>>>>>> d1c181ecd290a9e4f31a66b5bf9cb4641754a418
+
     elif Places == "L":
         print("Goodbye")
         break
