@@ -1,7 +1,7 @@
 ### Town
 
 import time
-from Character import fight
+from game.Character import fight
 import random
 
 

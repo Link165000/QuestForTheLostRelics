@@ -44,4 +44,5 @@ def client():
         else:
             print("Invalid move. Please use W, A, S, or D.")
 
-client()
+if __name__ == "__main__":
+    client()
