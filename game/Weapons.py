@@ -46,7 +46,8 @@ intermediate_bow = RangedWeapon(damage_delt=2, range_of=5, exp_given=1.5, health
 
 scythe = MeleeWeapon(damage_delt=20, exp_given=10, health_regen=10, spread=3)
 katana = MeleeWeapon(damage_delt=10, exp_given=30, health_regen=15, spread=5)
-        
+
+
     
         
 

@@ -111,10 +111,11 @@ class Weapon:
         self.defence = defence
 
 # Example character creation
-name = input("Enter your name: ")
-print("That's the dumbest name I've ever heard")
+if __name__ == "__main__":
+    name = input("Enter your name: ")
+    print("That's the dumbest name I've ever heard")
 
-stats = {
+    stats = {
     "vigor": 100,
     "mind": 20,
     "endurance": 69,
@@ -123,23 +124,23 @@ stats = {
     "intelligence": 2,
     "faith": 30,
     "arcane": 20
-}
+    }
 
-status = {
+    status = {
     "health": 100,
     "fp": 20,
     "stamina": 69,
     "Red Estus": 3,
     "Blue Estus": 2
-}
+    }
 
-player = Character(name, 1, stats, runes=100, status=status)
+    player = Character(name, 1, stats, runes=100, status=status)
 
-cool_sword = Weapon("Cool Sword", 42069, 2, 3452, 10, 500)
+    cool_sword = Weapon("Cool Sword", 42069, 2, 3452, 10, 500)
 
-# Main loop for leveling up
-while True:
-    player.level_up()
-    player.status["health"] -= 10
-    player.rest()
-    player.fight(10000, 10)
+    # Main loop for leveling up
+    while True:
+       player.level_up()
+       player.status["health"] -= 10
+       player.rest()
+       player.fight(10000, 10)

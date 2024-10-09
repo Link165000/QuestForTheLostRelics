@@ -8,7 +8,7 @@
 from authentication.auth import register_user, login_user
 from game.movement_client import display_map, receive_map, client
 
-def main():
+def login():
     print("Welcome to Quest for the Lost Relics!")
     
     action = input("Do you want to (1) Register or (2) Login? ")
@@ -27,5 +27,15 @@ def main():
     else:
         print("Invalid option. Exiting.")
 
+
+def main():
+    login()
+    # display_map()
+    # receive_map()
+    # client()
+
+
+
 if __name__ == "__main__":
     main()
+
