@@ -28,7 +28,7 @@ class MeleeWeapon(Weapon):
     def __init__(self, damage_delt, mastery_given, health_regen, spread):
         super().__init__(damage_delt, mastery_given, health_regen, spread)
         
-class RangedWeapon(Weapon):
+class Bows(Weapon):
     def __init__(self, damage_delt, range_of, mastery_given, health_regen, spread):
         super().__init__(damage_delt, mastery_given, health_regen, spread)
         self.range_of = range_of
@@ -36,20 +36,21 @@ class RangedWeapon(Weapon):
     def attack(self):
         return f"Dealt {self.damage_delt} damage at range {self.range_of}. Spread to {self.spread} enemies."
     
+
+    
     
     
 starter_sword = MeleeWeapon(damage_delt=1, mastery_given=0.5, health_regen=0, spread=1)
-starter_bow = RangedWeapon(damage_delt=1, range_of=2, mastery_given=0.5, health_regen=0, spread=1)
+starter_bow = Bows(damage_delt=1, range_of=2, mastery_given=0.5, health_regen=0, spread=1)
 
 intermediate_sword = MeleeWeapon(damage_delt=3, mastery_given=2, health_regen=0, spread=1)
-intermediate_bow = RangedWeapon(damage_delt=2, range_of=5, mastery_given=1.5, health_regen=0, spread=1)
+intermediate_bow = Bows(damage_delt=2, range_of=5, mastery_given=1.5, health_regen=0, spread=1)
 
 
 scythe = MeleeWeapon(damage_delt=20, mastery_given=10, health_regen=10, spread=3)
 katana = MeleeWeapon(damage_delt=10, mastery_given=2, health_regen=15, spread=5)
-        
-   
-        
+
+
 
 # def starter_sword():
 #     damage_delt = 1
