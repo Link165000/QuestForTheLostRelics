@@ -138,9 +138,8 @@ if __name__ == "__main__":
 
     cool_sword = Weapon("Cool Sword", 42069, 2, 3452, 10, 500)
 
-    # Main loop for leveling up
-    while True:
-       player.level_up()
-       player.status["health"] -= 10
-       player.rest()
-       player.fight(10000, 10)
+#    Example of different ways to use the character class
+#    player.level_up()
+#    player.status["health"] -= 10
+#    player.rest()
+#    player.fight(10000, 10)
