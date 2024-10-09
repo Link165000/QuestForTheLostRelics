@@ -1,21 +1,21 @@
 #this file exists to define what packages will be imported when you import the file
 #example use
 
-# import importlib
+import importlib
 
-# submodules = [
-#     'Town', 
-#     'Character',   
-#     'Weapons',
-#     'movement_client',
-#     'movement_server'
-# ]
+submodules = [
+    'Town', 
+    'Character',   
+    'Weapons',
+    'movement_client',
+    'movement_server'
+]
 
-# for module in submodules:
-#     try:
-#         globals()[module] = importlib.import_module(f'.{module}', __name__)
-#     except ImportError as e:
-#         print(f"Failed to import {module}: {e}")
+for module in submodules:
+    try:
+        globals()[module] = importlib.import_module(f'.{module}', __name__)
+    except ImportError as e:
+        print(f"Failed to import {module}: {e}")
 
 if __name__ == "__main__":
     from game.movement_client import  display_map, receive_map, client

@@ -263,4 +263,6 @@ def start_server():
         threading.Thread(target=handle_client, args=(client, address)).start()
 
 
-start_server()
+if  __name__ == "__main__":
+    start_server()
+
