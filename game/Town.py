@@ -1,7 +1,6 @@
 ### Town
 
 import time
-from game.Character import fight
 import random
 
 
@@ -137,7 +136,7 @@ def Healer(player):
             print("Your health is maxed")
             break
 
-print("Thank you for visiting the healer")
+        print("Thank you for visiting the healer")
     
     
     
@@ -264,27 +263,25 @@ def load_player(name, gold, inventory):
 if __name__ == '__main__':
     
     player = load_player("Hero", gold, inventory)
+    while True:
+        print("Town Square (T)', 'Fighting arena (F)', 'Magic School (M), ")
+        Places = str(input('Leave(L) and Help(H): '))
+        if Places == "T":
+           square(player)
+        elif Places == "'F'":
+            Fight()
+        elif Places == "M":
+            create_magic_school(player)
+        elif Places == "M":
+            Magic(player)
+
+        elif Places == "L":
+            print("Goodbye")
+            break
+        elif Places == "H":
+            Help(player)
+        elif Places == "I":
+            Inventory(player)
 
     
-while True:
-    print("Town Square (T)', 'Fighting arena (F)', 'Magic School (M), ")
-    Places = str(input('Leave(L) and Help(H): '))
-    if Places == "T":
-        square(player)
-    elif Places == "'F'":
 
-        fight()
-    elif Places == "M":
-        create_magic_school(player)
-
-        Fight(player)
-    elif Places == "M":
-        Magic(player)
-
-    elif Places == "L":
-        print("Goodbye")
-        break
-    elif Places == "H":
-        Help(player)
-    elif Places == "I":
-        Inventory(player)
