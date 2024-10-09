@@ -26,7 +26,7 @@ def receive_map(client_socket):
 # Main client function
 def client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(('10.100.2.115', 12345))
+    client_socket.connect(('10.100.2.181', 12345))
     client_socket.settimeout(5)  # 5 seconds timeout for example
 
     # Get player name
@@ -44,5 +44,5 @@ def client():
         else:
             print("Invalid move. Please use W, A, S, or D.")
 
-if __name__ == "__main__":
-    client()
+# if __name__ == "__main__":
+#     client()

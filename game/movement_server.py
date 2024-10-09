@@ -248,7 +248,7 @@ def handle_client(client, address):
 
 # Server setup
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('10.100.2.115', 12345))
+server_socket.bind(('10.100.2.181', 12345))
 server_socket.listen()
 
 clients = []
