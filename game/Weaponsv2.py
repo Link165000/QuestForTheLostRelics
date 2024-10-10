@@ -100,6 +100,11 @@ shadowfang_dagger = MeleeWeapon(damage_delt=45, mastery_given=16, health_regen=6
 soulreaper_staff = MagicStaff(damage_delt=40, mana_boost=15, mastery_given=15, health_regen=8, spread=3, special_ability="Damage buff", rarity="Legendary")
 void_spear = Bows(damage_delt=50, range_of=15, mastery_given=17, health_regen=2, spread=1, special_ability="Piercing", rarity="Legendary")
 
+
+# ??? Weapons
+void_reaver = LegendaryWeapon(damage_delt=200, mastery_given=50, health_regen=25, spread=1, special_ability="Upon striking an enemy, heal for 20% of damage dealt, gain an extra turn, and inflict burn", rarity="???")
+
+
 # Display examples of each weapon
 print(starter_sword.attack())
 print(starter_bow.attack())
