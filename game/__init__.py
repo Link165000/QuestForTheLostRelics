@@ -2,6 +2,7 @@
 #example use
 
 import importlib
+import pkgutil
 
 submodules = [
     'Town', 
@@ -11,11 +12,12 @@ submodules = [
     'movement_server'
 ]
 
-for module in submodules:
+
+for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
     try:
-        globals()[module] = importlib.import_module(f'.{module}', __name__)
+        globals()[module_name] = importlib.import_module(f'.{module_name}', __name__)
     except ImportError as e:
-        print(f"Failed to import {module}: {e}")
+        print(f"Failed to import {module_name}: {e}")
 
 if __name__ == "__main__":
     from game.movement_client import  display_map, receive_map, client
@@ -60,7 +62,10 @@ __all__ = [
     "intermediate_bow",
     "intermediate_sword",
     "scythe",
-    "katana"
+    "katana",
+    "Weapon",
+    "Bows",
+    "MeleeWeapon"
     ]
 
 
