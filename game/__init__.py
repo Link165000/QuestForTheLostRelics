@@ -24,7 +24,47 @@ if __name__ == "__main__":
     from game.movement_server import  game_map, update_map, players, display_size, update_map, display_map, broadcast_map, handle_client, start_server
     from game.Town import square, visit_blacksmith, visit_potions, Healer, create_magic_school, load_player, Fight, Magic, Inventory, Help, buy_blacksmith_item, buy_potion_item, Blacksmith, Potions
     from game.Weapons import Weapon, Bows, MeleeWeapon, starter_bow, starter_sword, intermediate_bow, intermediate_sword, scythe, katana
-
+    # Importing Classes and Instances
+    from game.Weaponsv2 import (
+        Weapon,
+        Shield,
+        MagicStaff,
+        MeleeWeapon,
+        Bows,
+        starter_sword,
+        starter_bow,
+        intermediate_sword,
+        intermediate_bow,
+        battle_axe,
+        dagger,
+        mace,
+        throwing_knives,
+        repeating_bow,
+        starter_staff,
+        ice_wand,
+        rapier,
+        scythe,
+        warhammer,
+        longbow,
+        nature_staff,
+        fire_staff,
+        flail,
+        katana,
+        crossbow,
+        lightning_rod,
+        greatsword,
+        superior_sword,
+        superior_bow,
+        superior_staff,
+        superior_dagger,
+        phoenix_blade,
+        darkmatter_bow,
+        crystal_staff,
+        shadowfang_dagger,
+        soulreaper_staff,
+        void_spear
+        void_reaver
+    )
 
 
 # #
