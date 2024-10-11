@@ -50,6 +50,12 @@ class Bows(Weapon):
         if self.special_ability:
             attack_info += f". Special ability: {self.special_ability}"
         return attack_info
+    
+class LegendaryWeapon(Weapon):
+    def __init__(self, damage_delt, mastery_given, health_regen, spread, rarity="F", special_ability=None):
+        super().__init__(damage_delt, mastery_given, health_regen, spread, rarity, special_ability)
+        self.rarity = "Legendary"
+        self.special_ability = special_ability
 
 
 # Starter Weapons

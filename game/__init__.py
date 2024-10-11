@@ -62,7 +62,7 @@ if __name__ == "__main__":
         crystal_staff,
         shadowfang_dagger,
         soulreaper_staff,
-        void_spear
+        void_spear,
         void_reaver
     )
 
@@ -105,7 +105,36 @@ __all__ = [
     "katana",
     "Weapon",
     "Bows",
-    "MeleeWeapon"
+    "MeleeWeapon",
+    "Shield",
+    "MagicStaff",
+    "battle_axe",
+    "dagger",
+    "mace",
+    "throwing_knives",
+    "repeating_bow",
+    "starter_staff",
+    "ice_wand",
+    "rapier",
+    "longbow",
+    "nature_staff",
+    "fire_staff",
+    "flail",
+    "crossbow",
+    "lightning_rod",
+    "greatsword",
+    "superior_sword",
+    "superior_bow",
+    "superior_staff",
+    "superior_dagger",
+    "phoenix_blade",
+    "darkmatter_bow",
+    "crystal_staff",
+    "shadowfang_dagger",
+    "soulreaper_staff",
+    "void_spear",
+    "void_reaver"
+
     ]
 
 
