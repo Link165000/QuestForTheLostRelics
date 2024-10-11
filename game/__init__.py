@@ -23,6 +23,7 @@ if __name__ == "__main__":
     from game.movement_client import  display_map, receive_map, client
     from game.movement_server import  game_map, update_map, players, display_size, update_map, display_map, broadcast_map, handle_client, start_server
     from game.Town import square, visit_blacksmith, visit_potions, Healer, create_magic_school, load_player, Fight, Magic, Inventory, Help, buy_blacksmith_item, buy_potion_item, Blacksmith, Potions
+    from game.Status_effect import StatusEffect, Poison, Bleed, Frostbite
     # from game.Weapons import Weapon, Bows, MeleeWeapon, starter_bow, starter_sword, intermediate_bow, intermediate_sword, scythe, katana
     # Importing Classes and Instances
     from game.Weaponsv2 import (
@@ -134,7 +135,11 @@ __all__ = [
     "shadowfang_dagger",
     "soulreaper_staff",
     "void_spear",
-    "void_reaver"
+    "void_reaver",
+    "StatusEffect",
+    "Poison",
+    "Bleed",
+    "Frostbite"
 
     ]
 
