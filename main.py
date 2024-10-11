@@ -27,12 +27,16 @@ def login():
     except ValueError:
         print("must be a number between 1 or 2") 
 
+def start_game():
+    print("Starting the game...")
+    # Add game initialization logic here
+    display_map()
+    receive_map()
+    client()
 
 def main():
     login()
-    # display_map()
-    # receive_map()
-    # client()
+    start_game()
 
 
 
