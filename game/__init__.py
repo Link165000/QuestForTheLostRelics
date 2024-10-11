@@ -121,6 +121,7 @@ __all__ = [
     "fire_staff",
     "flail",
     "crossbow",
+    "warhammer",
     "lightning_rod",
     "greatsword",
     "superior_sword",
