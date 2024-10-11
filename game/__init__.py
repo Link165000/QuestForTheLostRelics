@@ -7,7 +7,7 @@ import pkgutil
 submodules = [
     'Town', 
     'Character',   
-    'Weapons',
+    'Weaponsv2',
     'movement_client',
     'movement_server'
 ]
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     from . import (
     Town,
     Character,
-    Weapons,
+    Weaponsv2,
     movement_client,
     movement_server
 )
