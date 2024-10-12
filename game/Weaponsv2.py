@@ -112,9 +112,10 @@ void_reaver = LegendaryWeapon(damage_delt=200, mastery_given=50, health_regen=25
 
 
 # Display examples of each weapon
-print(starter_sword.attack())
-print(starter_bow.attack())
-print(ice_wand.attack())
-print(scythe.attack())
-print(phoenix_blade.attack())
-print(darkmatter_bow.attack())
+if __name__ == "__main__":
+    print(starter_sword.attack())
+    print(starter_bow.attack())
+    print(ice_wand.attack())
+    print(scythe.attack())
+    print(phoenix_blade.attack())
+    print(darkmatter_bow.attack())
