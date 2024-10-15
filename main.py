@@ -6,7 +6,7 @@
 import time
 import sys
 from authentication.auth import register_user, login_user
-from game.movement_client import display_map, receive_map, client, map_data
+from game.movement_client import display_map, receive_map, client
 
 
 # def loading_animation():
@@ -41,7 +41,7 @@ def login():
 def start_game():
     # loading_animation()
     # Add game initialization logic here
-    display_map(map_data)
+    display_map()
     receive_map()
     client()
 
