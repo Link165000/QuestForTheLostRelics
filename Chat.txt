@@ -4,3 +4,4 @@ skibidi
 really?
 W sigma L skibidi
 what did the most recent one do? ege the update
+main.py the map stuff - i think it needs map data
