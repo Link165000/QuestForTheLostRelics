@@ -15,17 +15,15 @@ class Character:
         if self.runes >= 20:
             print("What do you want to level up?")
             print(f"""
-Runes: {self.runes}
+XP: {self.runes}
 
 Level {self.level}
-Vigor: {self.stats['vigor']}
-Mind: {self.stats['mind']}
-Endurance: {self.stats['endurance']}
-Strength: {self.stats['strength']}
-Dexterity: {self.stats['dexterity']}
-Intelligence: {self.stats['intelligence']}
-Faith: {self.stats['faith']}
-Arcane: {self.stats['arcane']}""")
+Max Health: {self.stats['Max Health']}
+Max Maic: {self.stats['Max Magic']}
+Max Stamina: {self.stats['Max Stamina']}
+Strength: {self.stats['Strength']}
+Logic: {self.stats['Logic']}
+Belief: {self.stats['Belief']}""")
             choice = input("> ").lower()
             if choice in self.stats:
                 self.stats[choice] += 10
@@ -39,12 +37,12 @@ Arcane: {self.stats['arcane']}""")
 
     def rest(self):
         # Restore health, fp, and stamina to their corresponding maximum values
-        print("You sat near the bonfire.")
+        print("You sat near the fire.")
         print("Its warmth rejuvenated you.")
-        self.status["health"] = self.stats["vigor"]
-        self.status["fp"] = self.stats["mind"]
-        self.status["stamina"] = self.stats["endurance"]
-        print("Health, FP, and Stamina restored.")
+        self.status["health"] = self.stats["Max Health"]
+        self.status["magic"] = self.stats["Max Magic"]
+        self.status["stamina"] = self.stats["Max Stamina"]
+        print("Health, Magic, and Stamina restored.")
         # Add enemy respawn system here
 
     def fight(self, enemy_health, enemy_damage):
@@ -63,7 +61,16 @@ Arcane: {self.stats['arcane']}""")
             elif choice.lower() == "defend":
                 defending = True
             elif choice.lower() == "item":
-                pass
+                print("Heal health or magic?")
+                potion = input("> ")
+                if potion.lower() == "health" and player.status["healing potions"] > 0:
+                    player.status["healing potions"] -= 1
+                    self.status["health"] += 20
+                    print("+20 health")
+                elif potion.lower() == "magic" and player.status["magic potions"] > 0:
+                    player.status["magic potions"] -= 1
+                    self.status["magic"] += 20
+                    print("+20 magic")
             else:
                 print("You couldn't run away (u little bitch)")
 
@@ -86,20 +93,16 @@ Arcane: {self.stats['arcane']}""")
                 print("You died")
                 print("Skill issue")
                 quit()
-                
-            
+
+    # Could help with monitoring individual players' money and items
+    def buy(self, cost, item):
+        print(f"{name} bought {item} for {cost}")
+        self.runes -= cost
+        # Add code for adding to inventory
+
 
 # Probably won't add. Just stole stuff from Elden Ring
 # Could maybe change the name to ally or something
-
-class SpiritAsh:
-    def __init__(self, name, health, fp_cost, status_name, status_effect, status_affect_player):
-        self.name = name
-        self.health = health
-        self.fp_cost = fp_cost
-        self.status_name = status_name
-        self.status_effect = status_effect
-        self.status_affect_player = status_affect_player
 
 class Weapon:
     def __init__(self, name, damage, stamina_use, range, accuracy, defence):
@@ -110,28 +113,27 @@ class Weapon:
         self.accuracy = accuracy
         self.defence = defence
 
+
 # Example character creation
 if __name__ == "__main__":
     name = input("Enter your name: ")
     print("That's the dumbest name I've ever heard")
 
     stats = {
-    "vigor": 100,
-    "mind": 20,
-    "endurance": 69,
-    "strength": 50,
-    "dexterity": 40,
-    "intelligence": 2,
-    "faith": 30,
-    "arcane": 20
+        "Max Health": 100,
+        "Max Magic": 20,
+        "Max Stamina": 69,
+        "Strength": 50,
+        "Logic": 2,
+        "Belief": 30
     }
 
     status = {
-    "health": 100,
-    "fp": 20,
-    "stamina": 69,
-    "Red Estus": 3,
-    "Blue Estus": 2
+        "health": 100,
+        "magic": 20,
+        "stamina": 69,
+        "healing potions": 3,
+        "magic potions": 2
     }
 
     player = Character(name, 1, stats, runes=100, status=status)
