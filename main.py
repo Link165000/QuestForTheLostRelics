@@ -3,10 +3,21 @@
 #if tryna import from another folder do as i did down belolw
 #                  || 
 #                  \/
-
-
+import time
+import sys
 from authentication.auth import register_user, login_user
 from game.movement_client import display_map, receive_map, client
+
+
+# def loading_animation():
+#     print("Starting game", end="", flush=True)  # Print without newline
+#     # Loop for the animation
+#     for _ in range(3):  # Repeat the dot animation 3 times
+#         for dots in range(1, 4):  # Show 1 to 3 dots
+#             print("." * dots, end="", flush=True)  # Print dots without newline
+#             time.sleep(0.5)  # Pause for half a second
+#             print("\rStarting game", end="", flush=True)  # Clear dots and print "Starting game" again
+#     print("Starting game...") 
 
 def login():
     print("Welcome to Quest for the Lost Relics!")
@@ -28,7 +39,7 @@ def login():
         print("must be a number between 1 or 2") 
 
 def start_game():
-    print("Starting the game...")
+    # loading_animation()
     # Add game initialization logic here
     display_map()
     receive_map()

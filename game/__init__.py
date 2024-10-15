@@ -4,31 +4,26 @@
 import importlib
 import pkgutil
 
-submodules = [
+
+
+
+
+if __name__ == "__main__":
+
+    submodules = [
     'Town', 
     'Character',   
     'Weaponsv2',
     'movement_client',
     'movement_server'
 ]
+    for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
+       try:
+           globals()[module_name] = importlib.import_module(f'.{module_name}', __name__)
+       except ImportError as e:
+           print(f"Failed to import {module_name}: {e}")
 
 
-for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
-    try:
-        globals()[module_name] = importlib.import_module(f'.{module_name}', __name__)
-    except ImportError as e:
-        print(f"Failed to import {module_name}: {e}")
-
-
-
-if __name__ == "__main__":
-    from . import (
-    Town,
-    Character,
-    Weaponsv2,
-    movement_client,
-    movement_server
-)
     from game.movement_client import  display_map, receive_map, client
     from game.movement_server import  game_map, update_map, players, display_size, update_map, display_map, broadcast_map, handle_client, start_server
     from game.Town import square, visit_blacksmith, visit_potions, Healer, create_magic_school, load_player, Fight, Magic, Inventory, Help, buy_blacksmith_item, buy_potion_item, Blacksmith, Potions
