@@ -24,7 +24,7 @@ if __name__ == "__main__":
            print(f"Failed to import {module_name}: {e}")
 
 
-    from game.movement_client import  display_map, receive_map, client
+    from game.movement_client import  display_map, receive_map, client, map_data
     from game.movement_server import  game_map, update_map, players, display_size, update_map, display_map, broadcast_map, handle_client, start_server
     from game.Town import square, visit_blacksmith, visit_potions, Healer, create_magic_school, load_player, Fight, Magic, Inventory, Help, buy_blacksmith_item, buy_potion_item, Blacksmith, Potions
     from game.Status_effect import StatusEffect, Poison, Bleed, Frostbite
